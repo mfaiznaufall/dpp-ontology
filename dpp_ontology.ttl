@@ -1,92 +1,153 @@
-@prefix : <http://www.semanticweb.org/lenovo/ontologies/2026/4/untitled-ontology-10/> .
+@prefix : <https://mfaiznaufall.github.io/dpp-ontology#> .
+@prefix dpp: <https://mfaiznaufall.github.io/dpp-ontology#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <http://www.semanticweb.org/lenovo/ontologies/2026/4/untitled-ontology-10/> .
+@base <https://mfaiznaufall.github.io/dpp-ontology#> .
 
-<http://thesis.tudelft.nl/dpp> rdf:type owl:Ontology ;
-                                owl:imports <http://www.w3.org/ns/sosa/> ;
-                                rdfs:comment "Minimal DPP Ontology for instance-specific construction process data. Developed for MSc thesis at TU Delft." ;
-                                rdfs:label "DPP Ontology for Construction Process Data" .
+<https://mfaiznaufall.github.io/dpp-ontology> rdf:type owl:Ontology ;
+                                               owl:imports <http://www.w3.org/ns/sosa/> ,
+                                                           <https://w3id.org/aic> ;
+                                               rdfs:comment "Minimal DPP ontology for instance-specific construction process data. Developed for MSc thesis at TU Delft." ;
+                                               rdfs:label "DPP Ontology for Construction Process Data" .
 
 #################################################################
 #    Object Properties
 #################################################################
 
-###  http://thesis.tudelft.nl/dpp#hasEnvironmentalConditions
-:hasEnvironmentalConditions rdf:type owl:ObjectProperty ;
-                            rdfs:domain :DigitalProductPassport ;
-                            rdfs:range :EnvironmentalConditions ;
-                            rdfs:comment "Links a Digital Product Passport to its environmental conditions recorded during construction" ;
-                            rdfs:label "has environmental conditions" .
+###  https://mfaiznaufall.github.io/dpp-ontology#capturedDuring
+dpp:capturedDuring rdf:type owl:ObjectProperty ;
+                   rdfs:domain dpp:DigitalProductPassport ;
+                   rdfs:range <https://w3id.org/aic#Task> ;
+                   rdfs:comment "Links a Digital Product Passport to the AiC installation task during which the sensor data was recorded." ;
+                   rdfs:label "captured during" .
 
 
-###  http://thesis.tudelft.nl/dpp#recordedBy
-:recordedBy rdf:type owl:ObjectProperty ;
-            rdfs:domain :EnvironmentalConditions ;
-            rdfs:comment "Links environmental conditions to the AiC agent that recorded the data on the Digital Twin side" ;
-            rdfs:label "recorded by" .
+###  https://mfaiznaufall.github.io/dpp-ontology#forElement
+dpp:forElement rdf:type owl:ObjectProperty ;
+               rdfs:domain dpp:DigitalProductPassport ;
+               rdfs:range <https://w3id.org/aic#Element> ;
+               rdfs:comment "Links a Digital Product Passport to the specific AiC construction element it belongs to." ;
+               rdfs:label "for element" .
 
 
-###  http://thesis.tudelft.nl/dpp#relatedToActivity
-:relatedToActivity rdf:type owl:ObjectProperty ;
-                   rdfs:domain :EnvironmentalConditions ;
-                   rdfs:comment "Links environmental conditions to the AiC construction activity during which the data was recorded" ;
-                   rdfs:label "related to activity" .
+###  https://mfaiznaufall.github.io/dpp-ontology#hasEnvironmentalConditions
+dpp:hasEnvironmentalConditions rdf:type owl:ObjectProperty ;
+                               rdfs:domain dpp:DigitalProductPassport ;
+                               rdfs:range dpp:EnvironmentalConditions ;
+                               rdfs:comment "Links a Digital Product Passport to its aggregated environmental conditions recorded during installation." ;
+                               rdfs:label "has environmental conditions" .
 
 
-###  http://www.w3.org/ns/sosa/hasFeatureOfInterest
-<http://www.w3.org/ns/sosa/hasFeatureOfInterest> rdfs:domain <http://www.w3.org/ns/sosa/Observation> ;
-                                                 rdfs:range <http://www.w3.org/ns/sosa/FeatureOfInterest> .
+###  https://mfaiznaufall.github.io/dpp-ontology#installedBy
+dpp:installedBy rdf:type owl:ObjectProperty ;
+                rdfs:domain dpp:DigitalProductPassport ;
+                rdfs:range <https://w3id.org/aic#ConstructionAgent> ;
+                rdfs:comment "Links a Digital Product Passport to the AiC construction agent who performed the installation." ;
+                rdfs:label "installed by" .
 
 
-###  http://www.w3.org/ns/sosa/hasResult
-<http://www.w3.org/ns/sosa/hasResult> rdfs:domain <http://www.w3.org/ns/sosa/Observation> ;
-                                      rdfs:range :EnvironmentalConditions .
-
-
-###  http://www.w3.org/ns/sosa/madeBySensor
-<http://www.w3.org/ns/sosa/madeBySensor> rdfs:domain <http://www.w3.org/ns/sosa/Observation> ;
-                                         rdfs:range <http://www.w3.org/ns/sosa/Sensor> .
+###  https://mfaiznaufall.github.io/dpp-ontology#recordedBy
+dpp:recordedBy rdf:type owl:ObjectProperty ;
+               rdfs:domain dpp:EnvironmentalConditions ;
+               rdfs:range <https://w3id.org/aic#Equipment> ;
+               rdfs:comment "Links environmental conditions to the AiC equipment that recorded the sensor data." ;
+               rdfs:label "recorded by" .
 
 
 #################################################################
 #    Data properties
 #################################################################
 
-###  http://thesis.tudelft.nl/dpp#hasTVOC
-:hasTVOC rdf:type owl:DatatypeProperty ;
-         rdfs:domain :EnvironmentalConditions ;
-         rdfs:range xsd:integer ;
-         rdfs:comment "The Total Volatile Organic Compounds concentration in parts per billion (ppb) measured by the SGP30 sensor during construction" ;
-         rdfs:label "has TVOC value" .
+###  https://mfaiznaufall.github.io/dpp-ontology#averageECO2
+dpp:averageECO2 rdf:type owl:DatatypeProperty ;
+                rdfs:domain dpp:EnvironmentalConditions ;
+                rdfs:range xsd:decimal ;
+                rdfs:comment "Average equivalent CO2 concentration in parts per million (ppm) recorded during installation." ;
+                rdfs:label "average eCO2" .
 
 
-###  http://thesis.tudelft.nl/dpp#haseCO2
-:haseCO2 rdf:type owl:DatatypeProperty ;
-         rdfs:domain :EnvironmentalConditions ;
-         rdfs:range xsd:integer ;
-         rdfs:comment "The equivalent CO2 concentration in parts per million (ppm) measured by the SGP30 sensor during construction" ;
-         rdfs:label "has eCO2 value" .
+###  https://mfaiznaufall.github.io/dpp-ontology#averageTVOC
+dpp:averageTVOC rdf:type owl:DatatypeProperty ;
+                rdfs:domain dpp:EnvironmentalConditions ;
+                rdfs:range xsd:decimal ;
+                rdfs:comment "Average Total Volatile Organic Compounds concentration in parts per billion (ppb) recorded during installation." ;
+                rdfs:label "average TVOC" .
+
+
+###  https://mfaiznaufall.github.io/dpp-ontology#maximumECO2
+dpp:maximumECO2 rdf:type owl:DatatypeProperty ;
+                rdfs:domain dpp:EnvironmentalConditions ;
+                rdfs:range xsd:decimal ;
+                rdfs:comment "Maximum equivalent CO2 concentration in parts per million (ppm) recorded during installation." ;
+                rdfs:label "maximum eCO2" .
+
+
+###  https://mfaiznaufall.github.io/dpp-ontology#maximumTVOC
+dpp:maximumTVOC rdf:type owl:DatatypeProperty ;
+                rdfs:domain dpp:EnvironmentalConditions ;
+                rdfs:range xsd:decimal ;
+                rdfs:comment "Maximum Total Volatile Organic Compounds concentration in parts per billion (ppb) recorded during installation." ;
+                rdfs:label "maximum TVOC" .
+
+
+###  https://mfaiznaufall.github.io/dpp-ontology#minimumECO2
+dpp:minimumECO2 rdf:type owl:DatatypeProperty ;
+                rdfs:domain dpp:EnvironmentalConditions ;
+                rdfs:range xsd:decimal ;
+                rdfs:comment "Minimum equivalent CO2 concentration in parts per million (ppm) recorded during installation." ;
+                rdfs:label "minimum eCO2" .
+
+
+###  https://mfaiznaufall.github.io/dpp-ontology#minimumTVOC
+dpp:minimumTVOC rdf:type owl:DatatypeProperty ;
+                rdfs:domain dpp:EnvironmentalConditions ;
+                rdfs:range xsd:decimal ;
+                rdfs:comment "Minimum Total Volatile Organic Compounds concentration in parts per billion (ppb) recorded during installation." ;
+                rdfs:label "minimum TVOC" .
+
+
+###  https://mfaiznaufall.github.io/dpp-ontology#recordedFrom
+dpp:recordedFrom rdf:type owl:DatatypeProperty ;
+                 rdfs:domain dpp:EnvironmentalConditions ;
+                 rdfs:range xsd:dateTime ;
+                 rdfs:comment "Start timestamp of the sensor recording window corresponding to the installation task start time." ;
+                 rdfs:label "recorded from" .
+
+
+###  https://mfaiznaufall.github.io/dpp-ontology#recordedUntil
+dpp:recordedUntil rdf:type owl:DatatypeProperty ;
+                  rdfs:domain dpp:EnvironmentalConditions ;
+                  rdfs:range xsd:dateTime ;
+                  rdfs:comment "End timestamp of the sensor recording window corresponding to the installation task end time." ;
+                  rdfs:label "recorded until" .
+
+
+###  https://mfaiznaufall.github.io/dpp-ontology#totalReadings
+dpp:totalReadings rdf:type owl:DatatypeProperty ;
+                  rdfs:domain dpp:EnvironmentalConditions ;
+                  rdfs:range xsd:integer ;
+                  rdfs:comment "Total number of sensor readings captured during the installation task time window." ;
+                  rdfs:label "total readings" .
 
 
 #################################################################
 #    Classes
 #################################################################
 
-###  http://thesis.tudelft.nl/dpp#DigitalProductPassport
-:DigitalProductPassport rdf:type owl:Class ;
-                        rdfs:comment "An instance-specific Digital Product Passport for a construction product, capturing process data recorded during installation. Concept based on Kebede et al. (2024)." ;
-                        rdfs:label "Digital Product Passport" .
+###  https://mfaiznaufall.github.io/dpp-ontology#DigitalProductPassport
+dpp:DigitalProductPassport rdf:type owl:Class ;
+                           rdfs:comment "An instance-specific Digital Product Passport for a construction element, capturing environmental conditions recorded during installation." ;
+                           rdfs:label "Digital Product Passport" .
 
 
-###  http://thesis.tudelft.nl/dpp#EnvironmentalConditions
-:EnvironmentalConditions rdf:type owl:Class ;
-                         rdfs:subClassOf <http://www.w3.org/ns/sosa/Result> ;
-                         rdfs:comment "Sensor-captured environmental conditions during a construction activity. Subclass of sosa:Result." ;
-                         rdfs:label "Environmental Conditions" .
+###  https://mfaiznaufall.github.io/dpp-ontology#EnvironmentalConditions
+dpp:EnvironmentalConditions rdf:type owl:Class ;
+                            rdfs:subClassOf <http://www.w3.org/ns/sosa/Result> ;
+                            rdfs:comment "Aggregated sensor-captured environmental conditions during a construction element installation. Subclass of sosa:Result." ;
+                            rdfs:label "Environmental Conditions" .
 
 
 ###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
