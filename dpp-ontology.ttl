@@ -12,7 +12,7 @@
                                                owl:imports <http://www.w3.org/ns/sosa/> ,
                                                            <https://w3id.org/aic> ;
                                                <http://purl.org/dc/terms/creator> "Muhamad Faiz Naufal" ;
-                                               <http://purl.org/dc/terms/license> "http://purl.org/dc/terms/license" ;
+                                               <http://purl.org/dc/terms/license> <https://creativecommons.org/licenses/by/4.0/> ;
                                                rdfs:comment "A minimal ontology that connects construction process data captured by a Digital Twin with the Digital Product Passport, bridging sensor observations (SOSA) and construction processes (AiC)." ;
                                                rdfs:label "Digital Product Passport (DPP) Ontology" .
 
@@ -24,21 +24,24 @@
 dpp:duringTask rdf:type owl:ObjectProperty ;
                rdfs:domain <http://www.w3.org/ns/sosa/Observation> ;
                rdfs:range aic:Task ;
-               rdfs:comment "Links a sensor observation to the construction task during which it was captured." .
+               rdfs:comment "Links a sensor observation to the construction task during which it was captured." ;
+               rdfs:label "during task" .
 
 
 ###  https://mfaiznaufall.github.io/dpp-ontology#hasOverallConditions
 dpp:hasOverallConditions rdf:type owl:ObjectProperty ;
                          rdfs:domain dpp:DigitalProductPassport ;
                          rdfs:range dpp:EnvironmentalConditions ;
-                         rdfs:comment "Links a Digital Product Passport to the aggregated environmental conditions summary for its element." .
+                         rdfs:comment "Links a Digital Product Passport to the aggregated environmental conditions summary for its element." ;
+                         rdfs:label "has overall conditions" .
 
 
 ###  https://mfaiznaufall.github.io/dpp-ontology#represents
 dpp:represents rdf:type owl:ObjectProperty ;
                rdfs:domain dpp:DigitalProductPassport ;
                rdfs:range aic:Element ;
-               rdfs:comment "Links a Digital Product Passport to the installed element it represents." .
+               rdfs:comment "Links a Digital Product Passport to the installed element it represents." ;
+               rdfs:label "represents" .
 
 
 #################################################################
@@ -49,63 +52,72 @@ dpp:represents rdf:type owl:ObjectProperty ;
 dpp:hasAvgECO2 rdf:type owl:DatatypeProperty ;
                rdfs:domain dpp:EnvironmentalConditions ;
                rdfs:range xsd:decimal ;
-               rdfs:comment "The average ECO2 value recorded during construction." .
+               rdfs:comment "The average ECO2 value recorded during construction." ;
+               rdfs:label "has average ECO2" .
 
 
 ###  https://mfaiznaufall.github.io/dpp-ontology#hasAvgTVOC
 dpp:hasAvgTVOC rdf:type owl:DatatypeProperty ;
                rdfs:domain dpp:EnvironmentalConditions ;
                rdfs:range xsd:decimal ;
-               rdfs:comment "The average TVOC value recorded during construction." .
+               rdfs:comment "The average TVOC value recorded during construction." ;
+               rdfs:label "has average TVOC" .
 
 
 ###  https://mfaiznaufall.github.io/dpp-ontology#hasMaxECO2
 dpp:hasMaxECO2 rdf:type owl:DatatypeProperty ;
                rdfs:domain dpp:EnvironmentalConditions ;
                rdfs:range xsd:decimal ;
-               rdfs:comment "The maximum ECO2 value recorded during construction." .
+               rdfs:comment "The maximum ECO2 value recorded during construction." ;
+               rdfs:label "has maximum ECO2" .
 
 
 ###  https://mfaiznaufall.github.io/dpp-ontology#hasMaxTVOC
 dpp:hasMaxTVOC rdf:type owl:DatatypeProperty ;
                rdfs:domain dpp:EnvironmentalConditions ;
                rdfs:range xsd:decimal ;
-               rdfs:comment "The maximum TVOC value recorded during construction." .
+               rdfs:comment "The maximum TVOC value recorded during construction." ;
+               rdfs:label "has maximum TVOC" .
 
 
 ###  https://mfaiznaufall.github.io/dpp-ontology#hasMinECO2
 dpp:hasMinECO2 rdf:type owl:DatatypeProperty ;
                rdfs:domain dpp:EnvironmentalConditions ;
                rdfs:range xsd:decimal ;
-               rdfs:comment "The minimum ECO2 value recorded during construction." .
+               rdfs:comment "The minimum ECO2 value recorded during construction." ;
+               rdfs:label "has minimum ECO2" .
 
 
 ###  https://mfaiznaufall.github.io/dpp-ontology#hasMinTVOC
 dpp:hasMinTVOC rdf:type owl:DatatypeProperty ;
                rdfs:domain dpp:EnvironmentalConditions ;
                rdfs:range xsd:decimal ;
-               rdfs:comment "The minimum TVOC value recorded during construction." .
+               rdfs:comment "The minimum TVOC value recorded during construction." ;
+               rdfs:label "has minimum TVOC" .
 
 
 ###  https://mfaiznaufall.github.io/dpp-ontology#recordedFrom
 dpp:recordedFrom rdf:type owl:DatatypeProperty ;
                  rdfs:domain dpp:EnvironmentalConditions ;
                  rdfs:range xsd:dateTime ;
-                 rdfs:comment "The start of the time period over which the environmental readings were recorded." .
+                 rdfs:comment "The start of the time period over which the environmental readings were recorded." ;
+                 rdfs:label "recorded from" .
 
 
 ###  https://mfaiznaufall.github.io/dpp-ontology#recordedUntil
 dpp:recordedUntil rdf:type owl:DatatypeProperty ;
                   rdfs:domain dpp:EnvironmentalConditions ;
                   rdfs:range xsd:dateTime ;
-                  rdfs:comment "The end of the time period over which the environmental readings were recorded." .
+                  rdfs:comment "The end of the time period over which the environmental readings were recorded." ;
+                  rdfs:label "recorded until" .
 
 
 ###  https://mfaiznaufall.github.io/dpp-ontology#totalReadings
 dpp:totalReadings rdf:type owl:DatatypeProperty ;
                   rdfs:domain dpp:EnvironmentalConditions ;
                   rdfs:range xsd:integer ;
-                  rdfs:comment "The total number of sensor readings aggregated into the environmental summary." .
+                  rdfs:comment "The total number of sensor readings aggregated into the environmental summary." ;
+                  rdfs:label "total readings" .
 
 
 #################################################################
@@ -115,12 +127,14 @@ dpp:totalReadings rdf:type owl:DatatypeProperty ;
 ###  https://mfaiznaufall.github.io/dpp-ontology#DigitalProductPassport
 dpp:DigitalProductPassport rdf:type owl:Class ;
                            owl:disjointWith dpp:EnvironmentalConditions ;
-                           rdfs:comment "The Digital Product Passport of a specific installed product, recording the environmental conditions experienced during its construction." .
+                           rdfs:comment "The Digital Product Passport of a specific installed product, recording the environmental conditions experienced during its construction." ;
+                           rdfs:label "Digital Product Passport" .
 
 
 ###  https://mfaiznaufall.github.io/dpp-ontology#EnvironmentalConditions
 dpp:EnvironmentalConditions rdf:type owl:Class ;
-                            rdfs:comment "An aggregated summary of the environmental conditions (ECO2 and TVOC) experienced by a product during construction." .
+                            rdfs:comment "An aggregated summary of the environmental conditions (ECO2 and TVOC) experienced by a product during construction." ;
+                            rdfs:label "Environmental Conditions" .
 
 
 #################################################################
